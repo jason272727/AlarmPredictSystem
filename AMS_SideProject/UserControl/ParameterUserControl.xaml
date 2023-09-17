@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="AMS_SideProject.ParameterUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AMS_SideProject"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" d:DataContext="{d:DesignInstance Type=local:Parameter_UI}"
+             mc:Ignorable="d"          
+             d:DesignHeight="450" Width="1354">
+    <UserControl.Resources>
+        <Style x:Key="TitleStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Padding" Value="10, 10, 0, 5"/>
+        </Style>
+        <Style x:Key="ParameterValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Foreground" Value="#303030"/>
+        </Style>
+        <Style x:Key="ParameterUnitStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#303030"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Grid.RowSpan" Value="4"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="lvc:LineSeries">
+            <Setter Property="StrokeThickness" Value="3"></Setter>
+            <Setter Property="Stroke" Value="White"></Setter>
+            <Setter Property="Fill" Value="#4EFFFFFF"></Setter>
+            <Setter Property="PointGeometrySize" Value="0"></Setter>
+            <Setter Property="LineSmoothness" Value="0"></Setter>
+        </Style>
+        <Style TargetType="lvc:Axis">
+            <Setter Property="IsEnabled" Value="False"></Setter>
+            <Setter Property="ShowLabels" Value="False"/>
+        </Style>
+        <Style x:Key="OutStackStyle" TargetType="StackPanel">
+            <Setter Property="Grid.Row" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="25,0"/>
+        </Style>
+        <Style x:Key="CartesianStyle" TargetType="lvc:CartesianChart">
+            <Setter Property="Grid.Row" Value="2"/>
+            <Setter Property="Hoverable" Value="False"/>
+            <Setter Property="DataTooltip" Value="{x:Null}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--#region  Air Temperature-->
+        <DockPanel Grid.Column="0">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Border1" Style="{StaticResource BorderStyle}" />
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="#CE2156"></Border>
+                <TextBlock Grid.Row="0" Style="{StaticResource TitleStyle}" Text="Air Temperature"/>
+                <lvc:CartesianChart Series="{Binding AirTemperature_PlotValue}" Style="{StaticResource CartesianStyle}"/>
+                <StackPanel Style="{StaticResource OutStackStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding AirTemperature_Value}" Style="{StaticResource ParameterValueStyle}"/>
+                        <TextBlock Text="K" Style="{StaticResource ParameterUnitStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--#endregion-->
+        
+        <!--#region Process Temperature-->
+        <DockPanel Grid.Column="1">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Border2" Style="{StaticResource BorderStyle}"/>
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="#FFBB00"></Border>
+                <TextBlock Text="Process Temperature" Style="{StaticResource TitleStyle}"/>
+                <lvc:CartesianChart Series="{Binding ProcessTemperature_PlotValue}" Style="{StaticResource CartesianStyle}"/>
+                <StackPanel Style="{StaticResource OutStackStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ProcessTemperature_Value}" Style="{StaticResource ParameterValueStyle}"/>
+                        <TextBlock Text="K" Style="{StaticResource ParameterUnitStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--#endregion-->
+
+        <!--#region Rotation-->
+        <DockPanel Grid.Column="2">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Border3" Style="{StaticResource BorderStyle}"/>
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="	#5CADAD" ></Border>
+                <TextBlock Text="Rotational Speed" Style="{StaticResource TitleStyle}"/>
+                <lvc:CartesianChart Series="{Binding RotationalSpeed_PlotValue}" Style="{StaticResource CartesianStyle}"/>
+                <StackPanel Style="{StaticResource OutStackStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding RotationalSpeed_Value}" Style="{StaticResource ParameterValueStyle}"/>
+                        <TextBlock Text="rpm" Style="{StaticResource ParameterUnitStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--#endregion-->
+
+        <!--#region Torque-->
+        <DockPanel Grid.Column="3">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+
+                <Border x:Name="Border4" Style="{StaticResource BorderStyle}" />
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="	#9F35FF" ></Border>
+                <TextBlock Text="Torque" Style="{StaticResource TitleStyle}"/>
+                <lvc:CartesianChart Series="{Binding Torque_PlotValue}" Style="{StaticResource CartesianStyle}"/>
+                <StackPanel Style="{StaticResource OutStackStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Torque_Value}" Style="{StaticResource ParameterValueStyle}"/>
+                        <TextBlock Text="Nm" Style="{StaticResource ParameterUnitStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--#endregion-->
+
+        <!--#region Tool Wear-->
+        <DockPanel Grid.Column="4">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Border5" Style="{StaticResource BorderStyle}"/>
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="	#0066CC"></Border>
+                <TextBlock Text="Tool Wear" Style="{StaticResource TitleStyle}"/>
+                <lvc:CartesianChart Series="{Binding ToolWear_PlotValue}" Style="{StaticResource CartesianStyle}"/>
+                <StackPanel Style="{StaticResource OutStackStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ToolWear_Value}" Style="{StaticResource ParameterValueStyle}"/>
+                        <TextBlock Text="min" Style="{StaticResource ParameterUnitStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--#endregion-->
+    </Grid>
+</UserControl>
